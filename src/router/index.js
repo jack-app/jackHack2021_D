@@ -7,6 +7,7 @@ import SignIn from '../components/SignIn.vue'
 import ChatPage from '../components/ChatPage.vue'
 import Top from '../components/Top.vue'
 import Join from '../components/Join.vue'
+import Trim from '../components/TrimImage.vue'
 
 
 Vue.use(VueRouter)
@@ -40,6 +41,10 @@ const routes = [
     path: '/join',
     name: 'Join',
     component: Join
+  },{
+    path: '/trim',
+    name: 'Trim',
+    component: Trim
   }
 ]
 
