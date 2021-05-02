@@ -1,6 +1,6 @@
 <template>
   <div class="toppage">
-    とっぷぺーじ
+  トップページ
   </div>
 </template>
 

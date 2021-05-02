@@ -4,7 +4,7 @@
 
     <div class="main">
       <div class="main-content">
-        
+
       <input type="text" placeholder="Username" v-model="username">
       <input type="password" placeholder="Password" v-model="password">
       <button class="btn btn-info">Sign in</button>
@@ -12,11 +12,50 @@
         <router-link to="/signup">create account now!!</router-link>
       </div>
     </div>
-    
+
   </div>
 </template>
 
 <script>
+
+$(.btn-info).on("submit",(e)=>{
+e.preventDefualt();
+
+
+  const email=$(.).val();
+  const password=$(.).val();
+  firebase
+    .auth()
+    .signInWithEmailAndPassword(email, password)
+    .then(()=>{
+    console.log("ログイン成功");
+    })
+    .catch((error)=>{
+    console.log("エラーしました");
+    $(".btn-info").text("ログイン");
+    });
+
+  });
+
+
+
+const login=()=>{
+console.log("ログイン完了");
+
+}
+
+firebase.auth().onAuthStateChanged((user)=>{
+
+  if(user{
+    currentUID=user.uid;
+    login();
+  })
+  else{
+  return
+  };
+});
+
+
 export default {
   name: 'SignIn',
   data () {
@@ -32,7 +71,7 @@ export default {
 <style scoped>
 *{
   font-family:Arial, Helvetica, sans-serif;
-  
+
 }
 
 
@@ -42,7 +81,7 @@ export default {
   padding:10px;
   position:fixed;
   width:100%;
-  
+
 }
 
 
@@ -58,13 +97,13 @@ export default {
 input{
   display:block;
   margin:0 auto;
-  
+
 }
 .main-content{
   position: relative;
   top:50%;
   transform: translate(0%,-50%);
-    
+
 }
 .btn{
   margin-top: 10px;
