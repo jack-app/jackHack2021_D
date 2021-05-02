@@ -17,54 +17,39 @@
 </template>
 
 <script>
-
-$(.btn-info).on("submit",(e)=>{
-e.preventDefualt();
-
-
-  const email=$(.).val();
-  const password=$(.).val();
-  firebase
-    .auth()
-    .signInWithEmailAndPassword(email, password)
-    .then(()=>{
-    console.log("ログイン成功");
-    })
-    .catch((error)=>{
-    console.log("エラーしました");
-    $(".btn-info").text("ログイン");
-    });
-
-  });
-
-
-
-const login=()=>{
-console.log("ログイン完了");
-
-}
-
-firebase.auth().onAuthStateChanged((user)=>{
-
-  if(user{
-    currentUID=user.uid;
-    login();
-  })
-  else{
-  return
-  };
-});
-
+import firebase from 'firebase'
 
 export default {
   name: 'SignIn',
+  created(){
+    firebase.auth().onAuthStateChanged((user)=>{
+      if(user){
+        this.login();
+      }else{
+        return
+      }
+    });
+  },
   data () {
     return {
       username: '',
       password: ''
     }
   },
-  methods: {}
+  methods: {
+    signIn: function(){
+      firebase.auth().signInWithEmailAndPassword(this.username, this.password)
+        .then(()=>{
+          console.log("ログイン成功");
+        })
+        .catch(()=>{
+          console.log("エラーしました");
+        });
+    },
+    login: function(){
+      this.$router.push('/join')
+    }
+  }
 }
 </script>
 

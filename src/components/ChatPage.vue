@@ -23,51 +23,24 @@ import firebase from 'firebase'
 
 export default {
   name: 'ChatPage',
+  props: ['room'],
   components:{
     ChatText
   },
   data: () => ({
-    room : "room2",
-    name : "namae",
+    user : {},
     input : "",
     chattexts:[{
       key:1,
       icon:require('@/assets/logo.png'),
       name:"ねこ",
       text:"にゃー"
-    },{
-      key:2,
-      icon:require('@/assets/logo.png'),
-      name:"いぬ",
-      text:"わん"
-    },{
-      key:3,
-      icon:require('@/assets/logo.png'),
-      name:"きつね",
-      text:"こん"
-    },{
-      key:4,
-      icon:require('@/assets/logo.png'),
-      name:"きつね",
-      text:"こん"
-    },{
-      key:5,
-      icon:require('@/assets/logo.png'),
-      name:"きつね",
-      text:"こん"
-    },{
-      key:6,
-      icon:require('@/assets/logo.png'),
-      name:"きつね",
-      text:"こん"
-    },{
-      key:7,
-      icon:require('@/assets/logo.png'),
-      name:"きつね",
-      text:"こん"
     }]
   }),
   created(){
+    firebase.auth().onAuthStateChanged(user=>{
+      this.user = user ? user : {}
+    })
     let ref = firebase.database().ref(this.room+'/message')
     ref.limitToLast(5).on('child_added',this.childAdded)
   },
@@ -84,7 +57,7 @@ export default {
       let emotions = this.emotion(this.input);
       firebase.database().ref(this.room+'/message').push({
         text: this.input,
-        name: this.name,
+        name: this.user.displayName,
         emotions: emotions
       }, () => {
         this.input = ''

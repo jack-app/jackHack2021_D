@@ -3,15 +3,16 @@
     <h2 class="title">Sign up</h2>
     <div class="main">
       <div class="main-content">
-        <input type="text" placeholder="Username" v-model="username">
+        <input type="text" placeholder="email" v-model="email">
         <input type="password" placeholder="Password" v-model="password">
+        <input type="text" placeholder="Username" v-model="username">
 
         <div class="select-file">
           <img class="profile-img" src='@/assets/logo.png'/>
           <input class="select-btn" type="file" name="pic">
         </div>
 
-        <button class="btn btn-info">Register</button>
+        <button class="btn btn-info" v-on:click="signUp">Register</button>
         <p>Do you have an account?
           <router-link to="/signin">sign in now!!</router-link>
         </p>
@@ -22,55 +23,52 @@
 </template>
 
 <script>
-$(.btn-info).on("submit",(e)=>{
-e.preventDefualt();
-
-
-  const email=$(.).val();
-  const password=$(.).val();
-  firebase
-    .auth()
-    .createUserWithEmailAndPassword(email, password)
-    .then(() => {
-      console.log('ユーザを作成しました');
-    })
-    .catch(catchErrorOnCreateUser);
-  });
-
-const login=()=>{
-console.log("ログイン完了");
-
-};
-
-firebase.auth().onAuthStateChanged((user)=>{
-
-  if(user{
-    currentUID=user.uid;
-    login();
-  })
-  else{
-  return
-  };
-});
-
+import firebase from 'firebase'
 
 export default {
   name: 'SignUp',
   data () {
     return {
+      email : '',
       username: '',
       password: ''
     }
   },
-  methods: {}
+  created(){
+    firebase.auth().onAuthStateChanged((user)=>{
+      if(user){
+        this.login();
+      }else{
+        return
+      }
+    });
+  },
+  methods: {
+    signUp: function(){
+      firebase
+        .auth()
+        .createUserWithEmailAndPassword(this.email, this.password)
+        .then(() => {
+          let user = firebase.auth().currentUser;
+          user.updateProfile({
+            displayName:this.username
+          })
+        }).catch((error)=>{
+          alert(error.message);
+        })
+    },
+    login: function(){
+      this.$router.push('/join')
+    }
+  }
 }
 </script>
+
 <style scoped>
+
 *{
   font-family:Arial, Helvetica, sans-serif;
-
 }
-
 
 .title{
   color:white;
@@ -78,9 +76,7 @@ export default {
   padding:10px;
   position:fixed;
   width:100%;
-
 }
-
 
 .main{
   position:relative;
@@ -100,7 +96,6 @@ input{
   position: relative;
   top:50%;
   transform: translate(0%,-50%);
-
 }
 
 .select-file{
