@@ -27,8 +27,6 @@ import Croppa from "vue-croppa";
 import firebase from 'firebase'
 Vue.use(Croppa);
 
-const storage = firebase.storage()
-
 export default {
   name: 'SignUp',
   data () {
@@ -67,7 +65,9 @@ export default {
       this.$router.push('/join')
     },
     generateImage() {
+      let storage = firebase.storage()
       let encoded=encodeURI(this.username)
+      console.log(encoded)
       let pathReference = storage.ref("face/"+encoded+".png")
       this.myCroppa.generateBlob((blob)=>{
         pathReference.put(blob)
