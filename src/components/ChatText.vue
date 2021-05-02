@@ -2,7 +2,6 @@
   <div class="chattext">
     <img :src="icon"/>
     {{name}}
-    <br>
     {{text}}
   </div>
 </template>
