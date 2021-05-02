@@ -3,15 +3,14 @@
     <h2 class="title">Sign up</h2>
     <div class="main">
       <div class="main-content">
-        <input type="text" placeholder="email" v-model="email">
-        <input type="password" placeholder="Password" v-model="password">
-        <input type="text" placeholder="Username" v-model="username">
-
-        <div class="select-file">
-          <img class="profile-img" src='@/assets/logo.png'/>
-          <input class="select-btn" type="file" name="pic">
+        <div class="inputfield">
+          <input type="text" placeholder="email" v-model="email">
+          <input type="password" placeholder="Password" v-model="password">
+          <input type="text" placeholder="Username" v-model="username">
         </div>
-
+        <div class="image">
+          <croppa v-model="myCroppa" :width="200" :height="200" canvas-color="transparent"></croppa>
+        </div>
         <button class="btn btn-info" v-on:click="signUp">Register</button>
         <p>Do you have an account?
           <router-link to="/signin">sign in now!!</router-link>
@@ -23,7 +22,12 @@
 </template>
 
 <script>
+import Vue from "vue";
+import Croppa from "vue-croppa";
 import firebase from 'firebase'
+Vue.use(Croppa);
+
+const storage = firebase.storage()
 
 export default {
   name: 'SignUp',
@@ -31,7 +35,8 @@ export default {
     return {
       email : '',
       username: '',
-      password: ''
+      password: '',
+      myCroppa: null,
     }
   },
   created(){
@@ -44,11 +49,12 @@ export default {
     });
   },
   methods: {
-    signUp: function(){
+    signUp(){
       firebase
         .auth()
         .createUserWithEmailAndPassword(this.email, this.password)
         .then(() => {
+          this.generateImage()
           let user = firebase.auth().currentUser;
           user.updateProfile({
             displayName:this.username
@@ -57,8 +63,15 @@ export default {
           alert(error.message);
         })
     },
-    login: function(){
+    login(){
       this.$router.push('/join')
+    },
+    generateImage() {
+      let encoded=encodeURI(this.username)
+      let pathReference = storage.ref("face/"+encoded+".png")
+      this.myCroppa.generateBlob((blob)=>{
+        pathReference.put(blob)
+      })
     }
   }
 }
@@ -78,12 +91,16 @@ export default {
   width:100%;
 }
 
+.inputfield{
+  padding-bottom: 5px;
+}
+
 .main{
   position:relative;
   margin: 0 auto;
   top:80px;
   width:500px;
-  height:300px;
+  height:400px;
   background-color:#CEDADA;
 }
 

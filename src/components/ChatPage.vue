@@ -2,6 +2,7 @@
   <div class="chatpage">
     <header>
     チャットページ
+      <Logout />
     </header>
     <div class="chatpage-text">
     <ChatText v-for = "chattext in chattexts"
@@ -19,13 +20,15 @@
 </template>
 <script>
 import ChatText from './ChatText.vue'
+import Logout from './LogoutButton.vue'
 import firebase from 'firebase'
 
 export default {
   name: 'ChatPage',
   props: ['room'],
   components:{
-    ChatText
+    ChatText,
+    Logout
   },
   data: () => ({
     user : {},
