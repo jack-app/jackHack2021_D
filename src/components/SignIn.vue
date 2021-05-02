@@ -31,7 +31,7 @@ export default {
 
 <style scoped>
 *{
-  font-family:Hiragino Kaku Gothic Pro;
+  font-family:Arial, Helvetica, sans-serif;
   
 }
 
