@@ -5,7 +5,7 @@
     <div class="main">
       <div class="main-content">
 
-      <input type="text" placeholder="Username" v-model="username">
+      <input type="text" placeholder="email" v-model="username">
       <input type="password" placeholder="Password" v-model="password">
       <button class="btn btn-info">Sign in</button>
       <p>You don't have an account?</p>
