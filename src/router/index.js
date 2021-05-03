@@ -1,7 +1,5 @@
 import Vue from 'vue'
 import VueRouter from 'vue-router'
-import Home from '../views/Home.vue'
-import Hello from '../components/HelloWorld.vue'
 import SignUp from '../components/SignUp.vue'
 import SignIn from '../components/SignIn.vue'
 import ChatPage from '../components/ChatPage.vue'
@@ -19,12 +17,8 @@ let router = new VueRouter({
   routes: [
     {
       path: '/',
-      name: 'Home',
-      component: Home
-    },{
-      path: '/hello',
-      name: 'Hello',
-      component: Hello
+      name: 'Top',
+      component: Top
     },{
       path: '/signup',
       name: 'SignUp',
@@ -37,10 +31,6 @@ let router = new VueRouter({
       path: '/chat/:room',
       name: 'ChatPage',
       component: ChatPage
-    },{
-      path: '/top',
-      name: 'Top',
-      component: Top
     },{
       path: '/join',
       name: 'Join',

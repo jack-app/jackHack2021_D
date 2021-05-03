@@ -1,6 +1,6 @@
 <template>
   <div class="toppage">
-    <div class="toppage-title inview">
+    <div class="toppage-title inview" v-on:click="goLogin" >
       <h4 class="char"><img src="@/assets/1F(facemotion).png" alt=""></h4>
       <h4 class="char"><img src="@/assets/2a(facemotion).png" alt=""></h4>
       <h4 class="char"><img src="@/assets/3c(facemotion).png" alt=""></h4>
@@ -17,6 +17,13 @@
 
 <script>
 
+export default {
+  methods: {
+    goLogin(){
+      this.$router.push('/signup');
+    }
+  }
+}
 </script>
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
