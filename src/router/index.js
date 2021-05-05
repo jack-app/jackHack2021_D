@@ -30,7 +30,8 @@ let router = new VueRouter({
     },{
       path: '/chat/:room',
       name: 'ChatPage',
-      component: ChatPage
+      component: ChatPage,
+      props:true
     },{
       path: '/join',
       name: 'Join',

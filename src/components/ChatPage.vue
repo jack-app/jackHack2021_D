@@ -25,6 +25,7 @@ import firebase from 'firebase'
 
 export default {
   name: 'ChatPage',
+  props:['room'],
   components:{
     ChatText,
 //    Logout
@@ -32,7 +33,6 @@ export default {
   data: () => ({
     user : {},
     input : "",
-    room : "room",
     chattexts:[]
   }),
   created(){
