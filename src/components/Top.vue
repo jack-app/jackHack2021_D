@@ -28,18 +28,20 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
-  *{
+*{
   width:100%;
   height:100%;
   font-family:Arial, Helvetica, sans-serif;
   background-color:teal;
   color:white;
   padding:0;
-  }
-  .toppage img{
+}
+
+.toppage img{
   width:100%;
-  }
-  .toppage-title {
+}
+
+.toppage-title {
   position: absolute;
   top: 50%;
   left: 50%;
@@ -49,9 +51,11 @@ export default {
   display:flex;
   width:100%;
 }
+
 .toppage-title.inview {
   opacity: 1;
 }
+
 .inview .char {
   display: inline-block;
   -webkit-animation-name: kf-toppage-chars;
@@ -70,21 +74,21 @@ export default {
           animation-fill-mode: both;
 }
 
-
 .inview .character{
--webkit-animation-name:kf-character-chars;
-        animation-name:kf-character-chars;
--webkit-animation-duration: 2s;
-        animation-duration: 2s;
--webkit-animation-timing-function:ease;
-        animation-timing-function:ease;
--webkit-animation-iteration-count: 1;
-        animation-iteration-count: 1;
--webkit-animation-direction: normal;
-        animation-direction: normal;
--webkit-animation-fill-mode: both;
-        animation-fill-mode: both;
+  -webkit-animation-name:kf-character-chars;
+          animation-name:kf-character-chars;
+  -webkit-animation-duration: 2s;
+          animation-duration: 2s;
+  -webkit-animation-timing-function:ease;
+          animation-timing-function:ease;
+  -webkit-animation-iteration-count: 1;
+          animation-iteration-count: 1;
+  -webkit-animation-direction: normal;
+          animation-direction: normal;
+  -webkit-animation-fill-mode: both;
+          animation-fill-mode: both;
 }
+
 .character{
   transform:rotate(0);
   transform-origin:center;
@@ -114,6 +118,7 @@ export default {
   -webkit-animation-delay: 0.40s;
           animation-delay: 0.40s;
 }
+
 .inview .char:nth-child(6) {
   -webkit-animation-delay: 0.52s;
           animation-delay: 0.52s;
@@ -138,6 +143,7 @@ export default {
   -webkit-animation-delay: 1.00s;
           animation-delay: 1.00s;
 }
+
 @keyframes kf-toppage-chars {
   0% {
     opacity: 0;
@@ -150,6 +156,7 @@ export default {
             transform: translateY(0);
   }
 }
+
 @-webkit-keyframes kf-toppage-chars {
   0% {
     opacity: 0;
@@ -163,32 +170,30 @@ export default {
   }
 }
 
-
-
 @keyframes kf-character-chars{
-0%{
-  transform:rotate(1deg) scale(100);
-  opacity:0;
-}
-
-100%{
-  transform:rotate(720deg) scale(1.5);
-  opacity:1;
-}
-}
-@-webkit-keyframes kf-character-chars{
-  0%{
+  0% {
     transform:rotate(1deg) scale(100);
     opacity:0;
   }
-
   100%{
     transform:rotate(720deg) scale(1.5);
     opacity:1;
   }
 }
+
+@-webkit-keyframes kf-character-chars{
+  0%{
+    transform:rotate(1deg) scale(100);
+    opacity:0;
+  }
+  100%{
+    transform:rotate(720deg) scale(1.5);
+    opacity:1;
+  }
+}
+
 h4{
-height:auto;
-margin:auto;
+  height:auto;
+  margin:auto;
 }
 </style>

@@ -30,6 +30,7 @@ export default {
   -webkit-transition: all 0.5s;
   overflow:hidden;
 }
+
 @media(min-width:768px){
     .chattext{
     width:40%;
@@ -42,15 +43,18 @@ export default {
   height: 100px;
   width: 100px;
 }
+
 .chattext-content{
   width:60%;
   padding-left:15px;
   padding-top:15px;
 }
+
 .chattext-name{
   margin-bottom:15px;
   border-bottom:#AAFFFF;
 }
+
 .chattext-text{
   font-weight:lighter;
 }

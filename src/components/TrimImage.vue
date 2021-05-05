@@ -2,6 +2,7 @@
   <div>
     <h2 style="margin: 0;">Vue-Croppa</h2>
     <hr>
+    <p>node.jsライブラリvue-croppaをお試しできます</p>
     <croppa v-model="myCroppa" canvas-color="transparent"></croppa>
     <br>
     <button @click="generateImage">画像作成</button>
@@ -17,6 +18,7 @@ import Vue from "vue";
 import Croppa from "vue-croppa";
 import "vue-croppa/dist/vue-croppa.css";
 Vue.use(Croppa);
+
 export default {
   data() {
     return {
@@ -37,7 +39,3 @@ export default {
   }
 };
 </script>
-
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-</style>

@@ -1,8 +1,7 @@
 <template>
   <div class="chatpage">
     <header>
-    チャットページ
-    <!--  <Logout />-->
+      チャットページ(gyuttoeとしてログイン(している体))
     </header>
     <div class="chatpage-text">
     <ChatText v-for = "chattext in chattexts"
@@ -20,7 +19,6 @@
 </template>
 <script>
 import ChatText from './ChatText.vue'
-//import Logout from './LogoutButton.vue'
 import firebase from 'firebase'
 
 export default {
@@ -28,23 +26,18 @@ export default {
   props:['room'],
   components:{
     ChatText,
-//    Logout
   },
   data: () => ({
-    user : {},
+    user : {displayName: "gyuttoe"},
     input : "",
     chattexts:[]
   }),
   created(){
-    firebase.auth().onAuthStateChanged(user=>{
-      this.user = user ? user : {}
-    })
     let ref = firebase.database().ref(this.room+'/message')
     ref.limitToLast(5).on('child_added',this.childAdded)
   },
   methods:{
     childAdded(snap){
-      console.log("nya")
       let message=snap.val()
       this.chattexts.push({
         key: snap.key,
@@ -55,13 +48,14 @@ export default {
     },
     doSend(){
       let emotions = this.emotion(this.input);
-      console.log({i:emotions})
-      let url = this.user.photoURL;
+      let url;
       let encoded = encodeURI(this.user.displayName)
       if(emotions>0){
         url = "https://firebasestorage.googleapis.com/v0/b/emotional-chat-app.appspot.com/o/face%2F"+encoded+"happy.png?alt=media"
       }else if(emotions<0){
         url = "https://firebasestorage.googleapis.com/v0/b/emotional-chat-app.appspot.com/o/face%2F"+encoded+"sad.png?alt=media"
+      }else{
+        url = "https://firebasestorage.googleapis.com/v0/b/emotional-chat-app.appspot.com/o/face%2F"+encoded+".png?alt=media"
       }
       firebase.database().ref(this.room+'/message').push({
         text: this.input,
@@ -1049,12 +1043,11 @@ export default {
 
 <!-- Add "scoped" attribute to limit CSS to this component only -->
 <style scoped>
- .chatpage{
- background-color:;
- font-weight:600;
- height:;
- }
-  header{
+.chatpage{
+  font-weight:600;
+}
+
+header{
   background-color:#78FF94;
   color:white;
   height:40px;
@@ -1062,16 +1055,17 @@ export default {
   opacity:0.8;
   position:fixed;
   width:100%;
-  }
+}
 
-  .chatpage-text{
+.chatpage-text{
   padding:40px;
   min-width:450px;
   margin:0 auto;
   padding-bottom:45px;
   justify-content:space-around;
-  }
-  .chatpage-submit{
+}
+
+.chatpage-submit{
   position:fixed;
   margin:0 auto;
   padding-bottom: 20px;
@@ -1079,6 +1073,5 @@ export default {
   bottom:0;
   background-color:white;
   opacity:0.8;
-  }
-
+}
 </style>

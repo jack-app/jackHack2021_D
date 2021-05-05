@@ -1,5 +1,12 @@
 <template>
   <div id="app">
+    <router-link to="/">Top</router-link> |
+    <router-link to="/signup">SignUp</router-link> |
+    <router-link to="/signin">SignIn</router-link> |
+    <router-link to="/join">Join</router-link> |
+    <router-link to="/chat/default">Chat</router-link> |
+    <router-link to="/trim">Trimming</router-link> |
+    <router-link to="/face">FaceProcess</router-link>
     <router-view/>
   </div>
 </template>
