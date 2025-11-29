@@ -1,3 +1,2 @@
-# jackHack2021_D
-<!DOCTYPE html>
-a
+# Free AI at api.airforce
+https://discord.gg/AJDsM7jtbq
